@@ -5,9 +5,16 @@ api_version: 1
 threadsafe: yes
 
 handlers:
-- url: /favicon\.ico
-  static_files: favicon.ico
-  upload: favicon\.ico
+- url: /(.+\.(html|css|gif|png|jpg))$
+  static_files: \1
+  upload: .+\.(html|css|gif|png|jpg)$
+  application_readable: true
 
-- url: .*
-  script: main.php
+# PHP Scriptbestanden.
+- url: /(.+\.php)$
+  script: \1
+
+- url: /.*
+  static_files: index.html
+  upload: index.html
+  application_readable: true
